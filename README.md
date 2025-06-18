@@ -6,6 +6,16 @@
 > 
 > This is an enhanced version of the n8n MCP client with multi-tenant support, intelligent prompt handling, and enterprise-grade features designed for sophisticated MCP servers.
 
+## 🙏 Attribution
+
+This enhanced node is built upon the excellent foundation created by **Jd Fiscus** ([@nerding-io](https://github.com/nerding-io)):
+
+- **Original Project**: [n8n-nodes-mcp](https://github.com/nerding-io/n8n-nodes-mcp)
+- **npm Package**: [n8n-nodes-mcp](https://www.npmjs.com/package/n8n-nodes-mcp)
+- **Creator**: Jd Fiscus (jd@nerding.io)
+
+We're grateful for the original work that made this enhanced version possible. All core MCP protocol implementation and transport handling comes from the original project.
+
 ## 🚀 Enhanced Features
 
 - **Multi-Tenant Support**: Built-in tenant ID support for multi-tenant MCP servers
