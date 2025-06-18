@@ -22,15 +22,15 @@ declare const process: {
 
 export class McpClient implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'MCP Client',
+		displayName: 'MCP Client Enhanced',
 		name: 'mcpClient',
 		icon: 'file:mcpClient.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
-		description: 'Use MCP client',
+		description: 'Enhanced MCP client with multi-tenant support, smart prompts, and enterprise features',
 		defaults: {
-			name: 'MCP Client',
+			name: 'MCP Client Enhanced',
 		},
 		// @ts-ignore - node-class-description-outputs-wrong
 		inputs: [{ type: NodeConnectionType.Main }],
@@ -193,6 +193,32 @@ export class McpClient implements INodeType {
 				},
 				default: '',
 				description: 'Name of the prompt template to get',
+			},
+			{
+				displayName: 'Prompt Parameters',
+				name: 'promptParameters',
+				type: 'json',
+				required: false,
+				displayOptions: {
+					show: {
+						operation: ['getPrompt'],
+					},
+				},
+				default: '{}',
+				description: 'Parameters to pass to the prompt in JSON format. Leave empty {} for prompts that work without parameters.',
+			},
+			{
+				displayName: 'Tenant ID',
+				name: 'tenantId',
+				type: 'string',
+				required: false,
+				displayOptions: {
+					show: {
+						operation: ['getPrompt'],
+					},
+				},
+				default: 'scalogicai',
+				description: 'Tenant ID for multi-tenant MCP servers (e.g., scalogicai)',
 			},
 		],
 	};
@@ -630,8 +656,29 @@ export class McpClient implements INodeType {
 
 				case 'getPrompt': {
 					const promptName = this.getNodeParameter('promptName', 0) as string;
+					const promptParametersStr = this.getNodeParameter('promptParameters', 0, '{}') as string;
+					const tenantId = this.getNodeParameter('tenantId', 0, '') as string;
+					
+					// Parse prompt parameters
+					let promptParameters: any = {};
+					try {
+						promptParameters = JSON.parse(promptParametersStr);
+					} catch (error) {
+						throw new NodeOperationError(
+							this.getNode(),
+							`Invalid JSON in prompt parameters: ${error.message}`,
+						);
+					}
+					
+					// Add tenant ID to parameters if provided
+					if (tenantId) {
+						promptParameters.tenantId = tenantId;
+					}
+					
+					// Call getPrompt with parameters
 					const prompt = await client.getPrompt({
 						name: promptName,
+						arguments: promptParameters,
 					});
 					returnData.push({
 						json: { prompt },

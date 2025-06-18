@@ -1,25 +1,28 @@
 {
-	"name": "n8n-nodes-mcp",
-	"version": "0.1.28",
-	"description": "MCP nodes for n8n ",
+	"name": "@scalogicai/n8n-nodes-mcp-enhanced",
+	"version": "1.0.0",
+	"description": "Enhanced MCP nodes for n8n with multi-tenant support, smart UI forms, and enterprise features",
 	"keywords": [
 		"n8n-community-node-package",
 		"mcp",
 		"mcp-client",
-		"mcp-client-node",
-		"mcp-client-n8n",
-		"mcp-client-n8n-node",
-		"mcp-client-n8n-node-package"
+		"mcp-enhanced",
+		"multi-tenant",
+		"scalogicai",
+		"apollo",
+		"lead-generation",
+		"automation",
+		"enterprise"
 	],
 	"license": "MIT",
-	"homepage": "",
+	"homepage": "https://github.com/ScalogicAI/n8n-nodes-mcp-enhanced",
 	"author": {
-		"name": "Jd Fiscus",
-		"email": "jd@nerding.io"
+		"name": "ScalogicAI",
+		"email": "admin@scalogic.ai"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/nerding-io/n8n-nodes-mcp.git"
+		"url": "https://github.com/ScalogicAI/n8n-nodes-mcp-enhanced.git"
 	},
 	"main": "index.js",
 	"scripts": {

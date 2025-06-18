@@ -1,13 +1,39 @@
 [![Verified on MseeP](https://mseep.ai/badge.svg)](https://mseep.ai/app/bd76f121-1c8f-4f5d-9c65-1eac5d81b6af)
 
-# n8n-nodes-mcp-client
+# @scalogicai/n8n-nodes-mcp-enhanced
 
-> **Important Note:**
-> The Server-Sent Events (SSE) transport is deprecated and replaced by the new HTTP Streamable transport. SSE remains available for legacy compatibility, but HTTP Streamable is now the recommended method for all new implementations.
+> **Enhanced MCP Client with Enterprise Features**
+> 
+> This is an enhanced version of the n8n MCP client with multi-tenant support, intelligent prompt handling, and enterprise-grade features designed for sophisticated MCP servers.
 
-This is an n8n community node that lets you interact with Model Context Protocol (MCP) servers in your n8n workflows.
+## 🚀 Enhanced Features
 
-MCP is a protocol that enables AI models to interact with external tools and data sources in a standardized way. This node allows you to connect to MCP servers, access resources, execute tools, and use prompts.
+- **Multi-Tenant Support**: Built-in tenant ID support for multi-tenant MCP servers
+- **Smart Prompt Parameters**: Proper UI for prompt parameters instead of raw JSON
+- **Enterprise Ready**: Designed for sophisticated MCP servers like ScalogicAI's Apollo platform
+- **Backward Compatible**: Works with all existing MCP servers
+- **Enhanced Error Handling**: Better error messages and validation
+
+## 🎯 Built for Intelligent MCP Servers
+
+Unlike basic MCP clients, this enhanced version is designed to work with sophisticated, context-aware MCP servers that provide:
+- Industry-specific analysis
+- Multi-tenant configurations  
+- Dynamic prompt generation
+- Complex parameter handling
+
+## 🔧 Key Improvements over Basic MCP Client
+
+### **Prompt Execution**
+- ✅ **Proper parameter passing** - No more "undefined arguments" errors
+- ✅ **Tenant ID support** - Multi-tenant workflow support
+- ✅ **JSON validation** - Validates parameters before sending
+- ✅ **Smart defaults** - Works with prompts that need no parameters
+
+### **User Experience**  
+- ✅ **Form-based UI** - Dedicated fields instead of raw JSON
+- ✅ **Better descriptions** - Clear guidance for each field
+- ✅ **Error prevention** - Validation prevents common mistakes
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
