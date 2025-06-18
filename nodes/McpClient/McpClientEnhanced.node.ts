@@ -20,10 +20,10 @@ declare const process: {
 	env: Record<string, string | undefined>;
 };
 
-export class McpClient implements INodeType {
+export class McpClientEnhanced implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'MCP Client Enhanced',
-		name: 'mcpClient',
+		name: 'mcpClientEnhanced',
 		icon: 'file:mcpClient.svg',
 		group: ['transform'],
 		version: 1,
@@ -198,7 +198,6 @@ export class McpClient implements INodeType {
 				displayName: 'Prompt Parameters',
 				name: 'promptParameters',
 				type: 'json',
-				required: false,
 				displayOptions: {
 					show: {
 						operation: ['getPrompt'],
@@ -211,7 +210,6 @@ export class McpClient implements INodeType {
 				displayName: 'Tenant ID',
 				name: 'tenantId',
 				type: 'string',
-				required: false,
 				displayOptions: {
 					show: {
 						operation: ['getPrompt'],
@@ -391,7 +389,7 @@ export class McpClient implements INodeType {
 
 			const client = new Client(
 				{
-					name: `${McpClient.name}-client`,
+					name: `${McpClientEnhanced.name}-client`,
 					version: '1.0.0',
 				},
 				{
