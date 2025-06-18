@@ -1,7 +1,7 @@
 {
 	"name": "@scalogicai/n8n-nodes-mcp-enhanced",
-	"version": "1.0.1",
-	"description": "Enhanced MCP client with multi-tenant support and smart prompt handling. Fixes node conflicts and preserves all original functionality. Built on excellent foundation by Jd Fiscus (@nerding-io).",
+	"version": "1.0.2",
+	"description": "Enhanced MCP client with multi-tenant support and smart prompt handling. Fixed queue mode compatibility and node loading issues. Built on excellent foundation by Jd Fiscus (@nerding-io).",
 	"keywords": [
 		"n8n-community-node-package",
 		"mcp",
