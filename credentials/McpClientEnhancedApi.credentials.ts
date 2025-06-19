@@ -1,8 +1,8 @@
 import { ICredentialType, INodeProperties } from 'n8n-workflow';
 
-export class McpClientApi implements ICredentialType {
-	name = 'mcpClientApi';
-	displayName = 'MCP Client (STDIO) API';
+export class McpClientEnhancedApi implements ICredentialType {
+	name = 'mcpClientEnhancedApi';
+	displayName = 'MCP Client Enhanced (STDIO) API';
 
 	// Cast the icon to the correct type for n8n
 	icon = 'file:mcpClient.svg' as const;

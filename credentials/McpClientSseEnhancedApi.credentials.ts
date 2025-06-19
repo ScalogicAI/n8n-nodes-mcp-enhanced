@@ -1,35 +1,35 @@
 import { ICredentialType, INodeProperties } from 'n8n-workflow';
 
-export class McpClientHttpApi implements ICredentialType {
-	name = 'mcpClientHttpApi';
-	displayName = 'MCP Client (HTTP Streamable) API';
+export class McpClientSseEnhancedApi implements ICredentialType {
+	name = 'mcpClientSseEnhancedApi';
+	displayName = 'MCP Client Enhanced (SSE) API';
 
 	// Cast the icon to the correct type for n8n
 	icon = 'file:mcpClient.svg' as const;
 
 	properties: INodeProperties[] = [
 		{
-			displayName: 'HTTP Stream URL',
-			name: 'httpStreamUrl',
+			displayName: 'SSE URL',
+			name: 'sseUrl',
 			type: 'string',
-			default: 'http://localhost:3001/stream',
+			default: 'http://localhost:3001/sse',
 			required: true,
-			description: 'URL of the HTTP stream endpoint for the MCP server',
+			description: 'URL of the SSE endpoint for the MCP server',
 		},
 		{
-			displayName: 'HTTP Connection Timeout',
-			name: 'httpTimeout',
+			displayName: 'SSE Connection Timeout',
+			name: 'sseTimeout',
 			type: 'number',
 			default: 60000,
 			required: false,
-			description: 'Timeout for the HTTP stream connection in milliseconds. Default is 60 seconds.',
+			description: 'Timeout for the SSE connection in milliseconds. Default is 60 seconds.',
 		},
 		{
 			displayName: 'Messages Post Endpoint',
 			name: 'messagesPostEndpoint',
 			type: 'string',
 			default: '',
-			description: 'Optional custom endpoint for posting messages (if different from HTTP stream URL)',
+			description: 'Optional custom endpoint for posting messages (if different from SSE URL)',
 		},
 		{
 			displayName: 'Additional Headers',

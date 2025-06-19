@@ -39,7 +39,7 @@ export class McpClientEnhanced implements INodeType {
 		usableAsTool: true,
 		credentials: [
 			{
-				name: 'mcpClientApi',
+				name: 'mcpClientEnhancedApi',
 				required: false,
 				displayOptions: {
 					show: {
@@ -48,7 +48,7 @@ export class McpClientEnhanced implements INodeType {
 				},
 			},
 			{
-				name: 'mcpClientSseApi',
+				name: 'mcpClientSseEnhancedApi',
 				required: false,
 				displayOptions: {
 					show: {
@@ -57,7 +57,7 @@ export class McpClientEnhanced implements INodeType {
 				},
 			},
 			{
-				name: 'mcpClientHttpApi',
+				name: 'mcpClientHttpEnhancedApi',
 				required: false,
 				displayOptions: {
 					show: {
@@ -239,7 +239,7 @@ export class McpClientEnhanced implements INodeType {
 		try {
 			if (connectionType === 'http') {
 				// Use HTTP Streamable transport
-				const httpCredentials = await this.getCredentials('mcpClientHttpApi');
+				const httpCredentials = await this.getCredentials('mcpClientHttpEnhancedApi');
 
 				// Dynamically import the HTTP client
 				const { StreamableHTTPClientTransport } = await import('@modelcontextprotocol/sdk/client/streamableHttp.js');
@@ -277,7 +277,7 @@ export class McpClientEnhanced implements INodeType {
 				);
 			} else if (connectionType === 'sse') {
 				// Use SSE transport
-				const sseCredentials = await this.getCredentials('mcpClientSseApi');
+				const sseCredentials = await this.getCredentials('mcpClientSseEnhancedApi');
 
 				// Dynamically import the SSE client to avoid TypeScript errors
 				const { SSEClientTransport } = await import('@modelcontextprotocol/sdk/client/sse.js');
@@ -330,7 +330,7 @@ export class McpClientEnhanced implements INodeType {
 				}
 			} else {
 				// Use stdio transport (default)
-				const cmdCredentials = await this.getCredentials('mcpClientApi');
+				const cmdCredentials = await this.getCredentials('mcpClientEnhancedApi');
 
 				// Build environment variables object for MCP servers
 				const env: Record<string, string> = {
