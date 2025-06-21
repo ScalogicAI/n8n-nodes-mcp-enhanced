@@ -2,9 +2,9 @@
 
 # @scalogicai/n8n-nodes-mcp-enhanced
 
-> **Enhanced MCP Client with Enterprise Features**
+> **Enhanced MCP Client with Additional Features**
 > 
-> This is an enhanced version of the n8n MCP client with multi-tenant support, intelligent prompt handling, and enterprise-grade features designed for sophisticated MCP servers.
+> This is an enhanced version of the n8n MCP client with additional features for prompt parameters and multi-tenant support, designed for users who need these specific capabilities.
 
 ## 🙏 Attribution
 
@@ -16,34 +16,218 @@ This enhanced node is built upon the excellent foundation created by **Jd Fiscus
 
 We're grateful for the original work that made this enhanced version possible. All core MCP protocol implementation and transport handling comes from the original project.
 
-## 🚀 Enhanced Features
+## 🔧 What's Different?
 
-- **Multi-Tenant Support**: Built-in tenant ID support for multi-tenant MCP servers
-- **Smart Prompt Parameters**: Proper UI for prompt parameters instead of raw JSON
-- **Enterprise Ready**: Designed for sophisticated MCP servers like ScalogicAI's Apollo platform
-- **Backward Compatible**: Works with all existing MCP servers
-- **Enhanced Error Handling**: Better error messages and validation
+This version adds two specific features while maintaining full compatibility with the original:
 
-## 🎯 Built for Intelligent MCP Servers
+### **Additional Features:**
+- **Prompt Parameters**: Pass JSON parameters to prompts (original accepts prompt name only)
+- **Tenant ID Support**: Optional field for multi-tenant MCP servers
+- **Enhanced Validation**: Additional JSON parameter validation and error handling
 
-Unlike basic MCP clients, this enhanced version is designed to work with sophisticated, context-aware MCP servers that provide:
-- Industry-specific analysis
-- Multi-tenant configurations  
-- Dynamic prompt generation
-- Complex parameter handling
+### **What's Identical:**
+- **Resource handling**: listResources, readResource, listResourceTemplates work exactly the same
+- **Tool execution**: Same functionality for executing MCP tools
+- **Transport types**: Same support for STDIO, SSE, and HTTP Streamable
+- **Core MCP protocol**: Full compatibility with MCP specification
 
-## 🔧 Key Improvements over Basic MCP Client
+## 🎯 When to Use This Version
 
-### **Prompt Execution**
-- ✅ **Proper parameter passing** - No more "undefined arguments" errors
-- ✅ **Tenant ID support** - Multi-tenant workflow support
-- ✅ **JSON validation** - Validates parameters before sending
-- ✅ **Smart defaults** - Works with prompts that need no parameters
+Choose this enhanced version if:
+- Your MCP server accepts parameterized prompts
+- You work with multi-tenant MCP implementations
+- You need the specific additional features listed above
 
-### **User Experience**  
-- ✅ **Form-based UI** - Dedicated fields instead of raw JSON
-- ✅ **Better descriptions** - Clear guidance for each field
-- ✅ **Error prevention** - Validation prevents common mistakes
+Otherwise, the [original version](https://www.npmjs.com/package/n8n-nodes-mcp) works perfectly for standard MCP operations!
+
+## 🚀 Additional Features in Detail
+
+### **1. Prompt Parameters**
+
+**Original Version:**
+```
+- Prompt Name: "write_email"
+- Result: Gets generic email template
+```
+
+**Enhanced Version:**
+```
+- Prompt Name: "write_email"
+- Prompt Parameters: {"tone": "formal", "recipient": "manager", "topic": "project update"}
+- Result: Gets customized email with your specific requirements
+```
+
+### **2. Tenant ID Support**
+
+**Enhanced Version:**
+```
+- Prompt Name: "format_document"
+- Prompt Parameters: {"style": "academic"}
+- Tenant ID: "team-marketing"
+- Result: Gets team-specific document formatting and templates
+```
+
+## 📝 Parameter Formatting Guide
+
+### **JSON Parameter Examples:**
+
+**Simple text customization:**
+```json
+{
+  "language": "Spanish", 
+  "style": "casual"
+}
+```
+
+**Content parameters:**
+```json
+{
+  "topic": "renewable energy",
+  "audience": "general public",
+  "length": "short",
+  "include_examples": true
+}
+```
+
+**User preferences:**
+```json
+{
+  "user": {
+    "name": "Alex",
+    "skill_level": "beginner"
+  },
+  "output_format": "markdown",
+  "include_links": false
+}
+```
+
+**Complex nested parameters:**
+```json
+{
+  "content": {
+    "type": "tutorial",
+    "sections": ["intro", "examples", "conclusion"]
+  },
+  "formatting": {
+    "style": "academic",
+    "citations": true
+  },
+  "output": {
+    "format": "pdf",
+    "language": "English"
+  }
+}
+```
+
+### **Common Parameter Types:**
+- **Text**: `"language": "French"`
+- **Numbers**: `"word_count": 500`
+- **Booleans**: `"include_summary": true`
+- **Arrays**: `"topics": ["climate", "technology", "health"]`
+- **Objects**: `"format": {"type": "list", "numbered": true}`
+
+## 🌟 Real-World Examples
+
+### **Example 1: Content Creation**
+```json
+{
+  "prompt_name": "write_article",
+  "parameters": {
+    "topic": "sustainable living",
+    "tone": "informative",
+    "word_count": 800,
+    "target_audience": "beginners",
+    "include_tips": true
+  }
+}
+```
+
+### **Example 2: Data Processing**
+```json
+{
+  "prompt_name": "analyze_data",
+  "parameters": {
+    "data_type": "sales_figures",
+    "time_period": "last_quarter",
+    "include_charts": true,
+    "focus_areas": ["trends", "anomalies"]
+  }
+}
+```
+
+### **Example 3: Personal Workflows**
+```json
+{
+  "prompt_name": "organize_notes",
+  "parameters": {
+    "category": "meeting_notes",
+    "priority_level": "high",
+    "tags": ["project_alpha", "urgent"],
+    "format": "structured_list"
+  }
+}
+```
+
+### **Example 4: Team Environments**
+```json
+{
+  "prompt_name": "create_report",
+  "parameters": {
+    "department": "engineering",
+    "report_type": "weekly_standup",
+    "include_metrics": true
+  },
+  "tenant_id": "team-backend"
+}
+```
+
+## 🔄 Migration from Original Version
+
+This version is a **drop-in replacement** for the original:
+
+1. **Existing workflows continue to work unchanged**
+2. **New features are optional** - only activate when you use them
+3. **Same operations available**: Execute Tool, List Tools, Get Prompt, etc.
+4. **Same credential types**: STDIO, SSE, HTTP Streamable
+
+To use the new features, simply:
+- Add parameters to your "Get Prompt" operations when needed
+- Include tenant ID if your MCP server supports multi-tenancy
+- Leave these fields empty for standard MCP operations
+
+## 🛠️ Troubleshooting Enhanced Features
+
+### **JSON Parameter Issues**
+
+**Invalid JSON Error:**
+```
+❌ Error: Invalid JSON in prompt parameters
+✅ Fix: Ensure proper JSON formatting with quotes around strings
+```
+
+**Example fixes:**
+```json
+❌ {name: "John", active: true}
+✅ {"name": "John", "active": true}
+
+❌ {"list": [item1, item2]}
+✅ {"list": ["item1", "item2"]}
+```
+
+### **Empty Parameters**
+
+If your prompt doesn't need parameters, use:
+```json
+{}
+```
+
+Or leave the field empty - both work fine.
+
+### **Tenant ID Usage**
+
+- **Optional field** - only use if your MCP server supports tenants
+- **Leave empty** for single-tenant or standard MCP servers
+- **No impact** on servers that don't use tenant IDs
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
@@ -92,7 +276,7 @@ Also pay attention to Environment Variables for [using tools in AI Agents](#usin
 
 ## Credentials
 
-The MCP Client node supports three types of credentials to connect to an MCP server:
+The MCP Client Enhanced node supports three types of credentials to connect to an MCP server:
 
 ### Command-line Based Transport (STDIO)
 
@@ -120,12 +304,12 @@ This example shows how to connect to a locally running MCP server using HTTP Str
 
 2. Configure MCP Client credentials:
    - In the node settings, select **Connection Type**: `HTTP Streamable`
-   - Create new credentials of type **MCP Client (HTTP Streamable) API**
+   - Create new credentials of type **MCP Client Enhanced (HTTP Streamable) API**
    - Set **HTTP Streamable URL**: `http://localhost:3001/stream`
    - Add any required headers for authentication
 
-3. Create a workflow using the MCP Client node:
-   - Add an MCP Client node
+3. Create a workflow using the MCP Client Enhanced node:
+   - Add an MCP Client Enhanced node
    - Set the Connection Type to `HTTP Streamable`
    - Select your HTTP Streamable credentials
    - Execute the workflow to see the results
@@ -149,12 +333,12 @@ This example shows how to connect to a locally running MCP server using Server-S
 
 2. Configure MCP Client credentials:
    - In the node settings, select **Connection Type**: `Server-Sent Events (SSE)`
-   - Create new credentials of type **MCP Client (SSE) API**
+   - Create new credentials of type **MCP Client Enhanced (SSE) API**
    - Set **SSE URL**: `http://localhost:3001/sse`
    - Add any required headers for authentication
 
-3. Create a workflow using the MCP Client node:
-   - Add an MCP Client node
+3. Create a workflow using the MCP Client Enhanced node:
+   - Add an MCP Client Enhanced node
    - Set the Connection Type to `Server-Sent Events (SSE)`
    - Select your SSE credentials
    - Execute the workflow to see the results
@@ -163,7 +347,7 @@ This example shows how to connect to a locally running MCP server using Server-S
 
 ## Environment Variables
 
-The MCP Client node supports passing environment variables to MCP servers using the command-line based transport in two ways:
+The MCP Client Enhanced node supports passing environment variables to MCP servers using the command-line based transport in two ways:
 
 ### 1. Using the Credentials UI
 
@@ -206,10 +390,10 @@ This example shows how to set up and use the Brave Search MCP server:
    - **Arguments**: `-y @modelcontextprotocol/server-brave-search`
    - **Environment Variables**: `BRAVE_API_KEY=your-api-key` Add a variables (space comma or newline separated)
 
-3. Create a workflow that uses the MCP Client node:
-   - Add an MCP Client node
+3. Create a workflow that uses the MCP Client Enhanced node:
+   - Add an MCP Client Enhanced node
    - Select the "List Tools" operation to see available search tools
-   - Add another MCP Client node
+   - Add another MCP Client Enhanced node
    - Select the "Execute Tool" operation
    - Choose the "brave_search" tool
    - Set Parameters to: `{"query": "latest AI news"}`
@@ -245,7 +429,7 @@ services:
       - ~/.n8n:/home/node/.n8n
 ```
 
-2. Create multiple MCP Client credentials in n8n:
+2. Create multiple MCP Client Enhanced credentials in n8n:
 
    **Brave Search Credentials**:
    - Command: `npx`
@@ -265,8 +449,8 @@ services:
 
 3. Create an AI Agent workflow:
    - Add an AI Agent node
-   - Enable MCP Client as a tool
-   - Configure different MCP Client nodes with different credentials
+   - Enable MCP Client Enhanced as a tool
+   - Configure different MCP Client Enhanced nodes with different credentials
    - Create a prompt that uses multiple data sources
 
 ![Multi-Server Setup](./assets/multi-server-example.png)
@@ -282,12 +466,12 @@ With this setup, the AI agent can use multiple MCP tools across different server
 
 ## Operations
 
-The MCP Client node supports the following operations:
+The MCP Client Enhanced node supports the following operations:
 
 ![MCP Client Operations](./assets/operations.png)
 
 - **Execute Tool** - Execute a specific tool with parameters
-- **Get Prompt** - Get a specific prompt template
+- **Get Prompt** - Get a specific prompt template (with enhanced parameter support)
 - **List Prompts** - Get a list of available prompts
 - **List Resources** - Get a list of available resources from the MCP server
 - **List Tools** - Get a list of available tools
@@ -304,6 +488,21 @@ The List Tools operation returns all available tools from the MCP server, includ
 ![Execute Tool Example](./assets/execute-tool.png)
 
 The Execute Tool operation allows you to execute a specific tool with parameters. Make sure to select the tool you want to execute from the dropdown menu.
+
+### Example: Enhanced Get Prompt Operation
+
+The enhanced Get Prompt operation includes additional fields:
+
+- **Prompt Name**: Name of the prompt template (same as original)
+- **Prompt Parameters**: JSON parameters to customize the prompt (new feature)
+- **Tenant ID**: Optional tenant identifier for multi-tenant servers (new feature)
+
+Example usage:
+```
+Prompt Name: "summarize_text"
+Prompt Parameters: {"length": "short", "style": "bullet_points", "language": "English"}
+Tenant ID: "team-content" (optional)
+```
 
 ## Using as a Tool
 
@@ -340,7 +539,7 @@ Example of an AI Agent workflow results:
 
 ![AI Agent Example](./assets/execute-tool-result.png)
 
-After setting this environment variable and restarting n8n, your MCP Client node will be available as a tool in AI Agent nodes.
+After setting this environment variable and restarting n8n, your MCP Client Enhanced node will be available as a tool in AI Agent nodes.
 
 ## Compatibility
 
@@ -348,6 +547,15 @@ After setting this environment variable and restarting n8n, your MCP Client node
 - Compatible with MCP Protocol version 1.0.0 or later
 - Supports both STDIO and SSE transports for connecting to MCP servers
 - SSE transport requires a server that implements the MCP Server-Sent Events specification
+- **Fully backward compatible** with workflows using the original MCP client
+
+## Support & Questions
+
+For questions about the enhanced features or issues specific to this version:
+- **Email**: contact@scalogic.ai
+- **Issues**: [GitHub Issues](https://github.com/ScalogicAI/n8n-nodes-mcp-enhanced/issues)
+
+For questions about core MCP functionality, please refer to the [original project](https://github.com/nerding-io/n8n-nodes-mcp).
 
 ## Resources
 
@@ -357,4 +565,10 @@ After setting this environment variable and restarting n8n, your MCP Client node
 * [MCP Transports Overview](https://modelcontextprotocol.io/docs/concepts/transports)
 * [Using SSE in MCP](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/src/client/sse.ts)
 
+## License
 
+MIT License - see LICENSE file for details
+
+---
+
+**Built with ❤️ by ScalogicAI** | **Foundation by Jd Fiscus (@nerding-io)**
