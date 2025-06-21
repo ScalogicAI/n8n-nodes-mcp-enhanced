@@ -215,8 +215,8 @@ export class McpClientEnhanced implements INodeType {
 						operation: ['getPrompt'],
 					},
 				},
-				default: 'scalogicai',
-				description: 'Tenant ID for multi-tenant MCP servers (e.g., scalogicai)',
+				default: '',
+				description: 'Tenant ID for multi-tenant MCP servers (optional - leave empty for single-tenant servers)',
 			},
 		],
 	};
